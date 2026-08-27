@@ -1,7 +1,7 @@
 import { Generations, toID } from '@smogon/calc';
 
-/** Champions format is based on generation 8 (Sword/Shield). */
-export const CHAMPIONS_GEN = Generations.get(8);
+/** Generation index 0 is Champions in @smogon/calc's data tables. */
+export const CHAMPIONS_GEN = Generations.get(0);
 
 function sortedNames(items: Iterable<{ name: string }>): string[] {
   return [...items].map((item) => item.name).sort((a, b) => a.localeCompare(b));
