@@ -9,6 +9,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1120.0",
     "@smogon/calc": "file:vendor/smogon-calc",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
