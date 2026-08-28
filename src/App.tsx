@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { DamageCalculator } from './damage/DamageCalculator';
 
 type Tab = 'damage-calculator' | 'team-builder' | 'battle-tracker';
 
@@ -13,7 +14,7 @@ export function App() {
         <button onClick={() => setTab('team-builder')}>Team Builder</button>
         <button onClick={() => setTab('battle-tracker')}>Battle Tracker</button>
       </nav>
-      {tab === 'damage-calculator' && <p>Damage Calculator coming soon.</p>}
+      {tab === 'damage-calculator' && <DamageCalculator />}
       {tab === 'team-builder' && <p>Team Builder coming soon.</p>}
       {tab === 'battle-tracker' && <p>Battle Tracker coming soon.</p>}
     </div>
