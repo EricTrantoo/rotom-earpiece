@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { DamageCalculator } from './damage/DamageCalculator';
 import { TeamBuilder } from './team/TeamBuilder';
+import { BattleTracker } from './battle/BattleTracker';
 
 type Tab = 'damage-calculator' | 'team-builder' | 'battle-tracker';
 
@@ -17,7 +18,7 @@ export function App() {
       </nav>
       {tab === 'damage-calculator' && <DamageCalculator />}
       {tab === 'team-builder' && <TeamBuilder />}
-      {tab === 'battle-tracker' && <p>Battle Tracker coming soon.</p>}
+      {tab === 'battle-tracker' && <BattleTracker />}
     </div>
   );
 }
