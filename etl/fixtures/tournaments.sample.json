@@ -1,0 +1,20 @@
+[
+  {
+    "game": "VGC",
+    "name": "🍋Sitrus-Series🍋|Champions-MB|#73",
+    "date": "2026-08-26T22:00:00.000Z",
+    "format": "M-B",
+    "id": "6a7dcc97cdc0391d7fa6551e",
+    "players": 131,
+    "organizerId": 1468
+  },
+  {
+    "game": "VGC",
+    "name": "Underdog Cup - Quadro Pokémon in regalo!",
+    "date": "2026-08-26T16:30:00.000Z",
+    "format": "CUSTOM",
+    "id": "6a880a8178baaa6d1c224f75",
+    "players": 52,
+    "organizerId": 1752
+  }
+]
