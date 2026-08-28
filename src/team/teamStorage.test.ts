@@ -21,6 +21,17 @@ describe('teamStorage', () => {
     expect(loadTeams(createFakeStorage())).toEqual([]);
   });
 
+  it('returns an empty array (without throwing) when stored data is corrupt/invalid JSON', () => {
+    const storage = createFakeStorage();
+    storage.setItem('rotom-earpiece:teams', 'not valid json{{{');
+
+    let result: Team[] | undefined;
+    expect(() => {
+      result = loadTeams(storage);
+    }).not.toThrow();
+    expect(result).toEqual([]);
+  });
+
   it('saves and reloads a team', () => {
     const storage = createFakeStorage();
     upsertTeam(sampleTeam, storage);

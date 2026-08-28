@@ -18,7 +18,11 @@ export function PokemonSpecForm({ label, spec, onChange, speciesOptions, itemOpt
   }
 
   function updateStatPoint(stat: (typeof STATS)[number], value: number) {
-    onChange({ ...spec, statPoints: { ...spec.statPoints, [stat]: value } });
+    // A pasted/typed value like "999" or garbage text must not silently
+    // corrupt damage calculations with an out-of-range or NaN Stat Point —
+    // @smogon/calc doesn't validate this itself.
+    const clamped = Math.min(32, Math.max(0, Number.isFinite(value) ? value : 0));
+    onChange({ ...spec, statPoints: { ...spec.statPoints, [stat]: clamped } });
   }
 
   return (

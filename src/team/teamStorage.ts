@@ -4,7 +4,15 @@ const STORAGE_KEY = 'rotom-earpiece:teams';
 
 export function loadTeams(storage: Storage = window.localStorage): Team[] {
   const raw = storage.getItem(STORAGE_KEY);
-  return raw ? (JSON.parse(raw) as Team[]) : [];
+  if (!raw) return [];
+  try {
+    return JSON.parse(raw) as Team[];
+  } catch {
+    // Corrupt/malformed stored data — treat it the same as "nothing saved
+    // yet" rather than letting the parse failure crash TeamBuilder, which
+    // calls loadTeams() inside a useState initializer during render.
+    return [];
+  }
 }
 
 export function saveTeams(teams: Team[], storage: Storage = window.localStorage): void {
