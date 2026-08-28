@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-08-27T00:00:00.000Z",
+  "sampleTournaments": 1,
+  "samplePlayers": 2,
+  "species": {
+    "Incineroar": {
+      "species": "Incineroar",
+      "usageCount": 2,
+      "itemCounts": { "Sitrus Berry": 2 },
+      "abilityCounts": { "Intimidate": 2 },
+      "moveCounts": { "Flare Blitz": 2, "Parting Shot": 2, "Fake Out": 2 },
+      "natureCounts": { "Careful": 1, "Relaxed": 1 },
+      "variants": [
+        { "item": "Sitrus Berry", "ability": "Intimidate", "moves": ["Parting Shot", "Flare Blitz", "Helping Hand", "Fake Out"], "nature": "Careful", "count": 1 },
+        { "item": "Sitrus Berry", "ability": "Intimidate", "moves": ["Flare Blitz", "Parting Shot", "Fake Out", "Darkest Lariat"], "nature": "Relaxed", "count": 1 }
+      ]
+    }
+  }
+}
