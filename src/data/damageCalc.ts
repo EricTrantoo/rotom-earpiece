@@ -40,17 +40,12 @@ export function computeDamage(attacker: PokemonSpec, defender: PokemonSpec, move
   const [minDamage, maxDamage] = result.range();
   const defenderMaxHP = def.maxHP();
 
-  // When damage is 0 (e.g., immunity), kochance() and fullDesc() will throw,
-  // so handle separately
-  const koChance = maxDamage === 0 ? 'never' : result.kochance().text;
-  const description = maxDamage === 0 ? '0 damage' : result.fullDesc();
-
   return {
     minDamage,
     maxDamage,
-    minPercent: Math.round((minDamage / defenderMaxHP) * 1000) / 10,
-    maxPercent: Math.round((maxDamage / defenderMaxHP) * 1000) / 10,
-    koChance,
-    description,
+    minPercent: Math.floor((minDamage / defenderMaxHP) * 1000) / 10,
+    maxPercent: Math.floor((maxDamage / defenderMaxHP) * 1000) / 10,
+    koChance: result.kochance(false).text,
+    description: result.fullDesc(undefined, false),
   };
 }
