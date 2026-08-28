@@ -1,4 +1,8 @@
-import { Generations, toID } from '@smogon/calc';
+// Named imports from '@smogon/calc' don't survive Rollup's production build: the package
+// re-exports these via a dynamic `__createBinding` helper that Rollup's CJS static export
+// analysis can't see. Importing the whole module and destructuring at runtime works around it.
+import * as calc from '@smogon/calc';
+const { Generations, toID } = calc;
 
 /** Generation index 0 is Champions in @smogon/calc's data tables. */
 export const CHAMPIONS_GEN = Generations.get(0);

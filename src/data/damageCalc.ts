@@ -1,4 +1,6 @@
-import { calculate, Pokemon, Move, Field } from '@smogon/calc';
+// See championsData.ts for why this is a namespace import rather than named imports.
+import * as calc from '@smogon/calc';
+const { calculate, Pokemon, Move, Field } = calc;
 import { CHAMPIONS_GEN } from './championsData';
 
 export interface PokemonSpec {
