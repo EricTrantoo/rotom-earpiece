@@ -21,6 +21,11 @@ export function aggregateUsageStats(standingsByTournament: StandingEntry[][]): M
 
   for (const standings of standingsByTournament) {
     for (const player of standings) {
+      // Some tournaments (confirmed via live API) return `decklist: null`
+      // for players whose decklists were never made public. Skip them
+      // entirely: they contributed no set data, so they shouldn't count
+      // toward samplePlayers either.
+      if (!Array.isArray(player.decklist)) continue;
       samplePlayers += 1;
       for (const mon of player.decklist) {
         const usage = species[mon.name] ?? emptyUsage(mon.name);

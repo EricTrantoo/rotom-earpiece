@@ -21,6 +21,9 @@ export interface DecklistEntry {
 
 export interface StandingEntry {
   name: string;
-  decklist: DecklistEntry[];
+  // The Limitless API returns `null` here for tournaments where decklists
+  // were never made public — this is not hypothetical, it happens for real,
+  // currently-active Champions tournaments. Callers must guard accordingly.
+  decklist: DecklistEntry[] | null;
   placing: number;
 }
