@@ -10,8 +10,10 @@ export default defineConfig({
       // vendor/smogon-calc, so its real path falls outside node_modules/** —
       // Rollup's default CJS-conversion scan never reaches it, leaving
       // unconverted require() calls in the production bundle that throw in
-      // a real browser (no ambient `require`).
-      include: [/node_modules/, /vendor\/smogon-calc/],
+      // a real browser (no ambient `require`). Matching all of vendor/
+      // (not just this one package) so any future vendored dependency
+      // doesn't silently reintroduce this exact failure mode.
+      include: [/node_modules/, /vendor\//],
     },
   },
   test: {
