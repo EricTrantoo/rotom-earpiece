@@ -48,14 +48,19 @@ export function BattleTracker() {
   const effectiveAbility = overrideAbility || topCandidate?.ability || undefined;
   const effectiveNature = overrideNature || topCandidate?.nature || undefined;
 
-  const damage =
-    attackerSpecies && attackerMove && focusedSpecies
-      ? computeDamage(
-          { species: attackerSpecies },
-          { species: focusedSpecies, item: effectiveItem, ability: effectiveAbility, nature: effectiveNature },
-          attackerMove
-        )
-      : null;
+  let damage: ReturnType<typeof computeDamage> | null = null;
+  let damageError: string | null = null;
+  if (attackerSpecies && attackerMove && focusedSpecies) {
+    try {
+      damage = computeDamage(
+        { species: attackerSpecies },
+        { species: focusedSpecies, item: effectiveItem, ability: effectiveAbility, nature: effectiveNature },
+        attackerMove
+      );
+    } catch {
+      damageError = 'Could not calculate damage for this matchup — check the override values.';
+    }
+  }
 
   function addEvidence() {
     if (!evidenceValue) return;
@@ -63,10 +68,10 @@ export function BattleTracker() {
     setEvidenceValue('');
   }
 
-  if (loadError) return <p role="alert">Could not load meta data: {loadError}</p>;
-
   return (
     <section aria-label="Battle Tracker">
+      {loadError && <p role="alert">Could not load meta data: {loadError}</p>}
+
       <h2>Team Preview</h2>
       {opponentRoster.map((species, i) => (
         <label key={i}>
@@ -193,6 +198,7 @@ export function BattleTracker() {
           ))}
         </select>
       </label>
+      {damageError && <p role="alert">{damageError}</p>}
       {damage && (
         <p>
           {damage.minDamage}-{damage.maxDamage} damage ({damage.minPercent}% - {damage.maxPercent}%)

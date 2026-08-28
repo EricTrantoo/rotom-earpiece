@@ -8,8 +8,8 @@ const metaSets: MetaSets = {
   sampleTournaments: 1,
   samplePlayers: 10,
   species: {
-    Incineroar: { species: 'Incineroar', usageCount: 8, itemCounts: {}, abilityCounts: {}, moveCounts: {}, natureCounts: {}, variants: [] },
-    Sinistcha: { species: 'Sinistcha', usageCount: 3, itemCounts: {}, abilityCounts: {}, moveCounts: {}, natureCounts: {}, variants: [] },
+    incineroar: { species: 'Incineroar', usageCount: 8, itemCounts: {}, abilityCounts: {}, moveCounts: {}, natureCounts: {}, variants: [] },
+    sinistcha: { species: 'Sinistcha', usageCount: 3, itemCounts: {}, abilityCounts: {}, moveCounts: {}, natureCounts: {}, variants: [] },
   },
 };
 

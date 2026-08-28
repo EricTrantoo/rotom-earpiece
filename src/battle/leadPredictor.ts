@@ -1,4 +1,7 @@
 import type { MetaSets } from '../shared/metaSetsTypes';
+// See src/data/championsData.ts for why this is a namespace import rather than a named import.
+import * as calc from '@smogon/calc';
+const { toID } = calc;
 
 export interface LeadPrediction {
   species: string;
@@ -13,6 +16,6 @@ export interface LeadPrediction {
  */
 export function predictLikelyLeads(revealedRoster: string[], metaSets: MetaSets): LeadPrediction[] {
   return revealedRoster
-    .map((species) => ({ species, usageCount: metaSets.species[species]?.usageCount ?? 0 }))
+    .map((species) => ({ species, usageCount: metaSets.species[toID(species)]?.usageCount ?? 0 }))
     .sort((a, b) => b.usageCount - a.usageCount);
 }

@@ -7,7 +7,7 @@ const metaSets: MetaSets = {
   sampleTournaments: 1,
   samplePlayers: 2,
   species: {
-    Incineroar: {
+    incineroar: {
       species: 'Incineroar',
       usageCount: 2,
       itemCounts: {}, abilityCounts: {}, moveCounts: {}, natureCounts: {},

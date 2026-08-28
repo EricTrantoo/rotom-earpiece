@@ -7,7 +7,7 @@ const sample: MetaSets = {
   sampleTournaments: 1,
   samplePlayers: 2,
   species: {
-    Incineroar: { species: 'Incineroar', usageCount: 2, itemCounts: { 'Sitrus Berry': 2 }, abilityCounts: {}, moveCounts: {}, natureCounts: {}, variants: [] },
+    incineroar: { species: 'Incineroar', usageCount: 2, itemCounts: { 'Sitrus Berry': 2 }, abilityCounts: {}, moveCounts: {}, natureCounts: {}, variants: [] },
   },
 };
 

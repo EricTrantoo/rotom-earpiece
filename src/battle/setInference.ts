@@ -1,4 +1,7 @@
 import type { MetaSets, SetVariant } from '../shared/metaSetsTypes';
+// See src/data/championsData.ts for why this is a namespace import rather than a named import.
+import * as calc from '@smogon/calc';
+const { toID } = calc;
 
 export type EvidenceKind = 'move' | 'item' | 'ability' | 'nature';
 
@@ -34,7 +37,7 @@ function isConsistent(variant: SetVariant, evidence: Evidence[]): boolean {
  * honest than silently hiding data.
  */
 export function inferSets(species: string, evidence: Evidence[], metaSets: MetaSets): RankedCandidate[] {
-  const variants = metaSets.species[species]?.variants ?? [];
+  const variants = metaSets.species[toID(species)]?.variants ?? [];
   const surviving = variants.filter((v) => isConsistent(v, evidence));
   const pool = surviving.length > 0 ? surviving : variants;
 
