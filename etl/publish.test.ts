@@ -30,12 +30,37 @@ describe('publishMetaSets', () => {
     expect(writer.store.get('meta-sets/latest.json')).toContain('Incineroar');
   });
 
-  it('does not overwrite latest.json with invalid (empty) data', async () => {
+  it('throws and does not overwrite latest.json with invalid (empty) data', async () => {
     const writer = createFakeWriter();
     writer.store.set('meta-sets/latest.json', JSON.stringify(validMetaSets));
     const invalid: MetaSets = { ...validMetaSets, samplePlayers: 0, species: {} };
 
-    await publishMetaSets(invalid, writer);
+    await expect(publishMetaSets(invalid, writer)).rejects.toThrow();
+
+    expect(writer.store.get('meta-sets/latest.json')).toContain('Incineroar');
+  });
+
+  it('throws and does not overwrite latest.json when samplePlayers drops more than 50% from the last published run', async () => {
+    const writer = createFakeWriter();
+    const goodPrevious: MetaSets = { ...validMetaSets, samplePlayers: 2540 };
+    writer.store.set('meta-sets/latest.json', JSON.stringify(goodPrevious));
+
+    // Individually "valid" per validateMetaSets (samplePlayers > 0, species
+    // non-empty), but a >99% drop from the last published run — the kind of
+    // degraded-but-technically-valid run that must not silently overwrite
+    // good historical data.
+    const degraded: MetaSets = { ...validMetaSets, samplePlayers: 2 };
+
+    await expect(publishMetaSets(degraded, writer)).rejects.toThrow(/samplePlayers/);
+
+    expect(writer.store.get('meta-sets/latest.json')).toEqual(JSON.stringify(goodPrevious));
+  });
+
+  it('publishes normally when there is no previous latest.json to compare against', async () => {
+    const writer = createFakeWriter();
+    const firstEverRun: MetaSets = { ...validMetaSets, samplePlayers: 2 };
+
+    await publishMetaSets(firstEverRun, writer);
 
     expect(writer.store.get('meta-sets/latest.json')).toContain('Incineroar');
   });
